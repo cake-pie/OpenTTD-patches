@@ -395,7 +395,7 @@ public:
 
 			case PROGRAM_WIDGET_GOTO_SIGNAL: {
 				ScrollMainWindowToTile(this->tile);
-				// this->RaiseWidget(PROGRAM_WIDGET_GOTO_SIGNAL);
+				this->UpdateButtonState();
 			} break;
 
 			case PROGRAM_WIDGET_REMOVE_PROGRAM: {
@@ -608,6 +608,10 @@ public:
 			case PROGRAM_WIDGET_INSTRUCTION_LIST:
 				resize->height = FONT_HEIGHT_NORMAL;
 				size->height = 6 * resize->height + WidgetDimensions::scaled.framerect.Vertical();
+				break;
+
+			case PROGRAM_WIDGET_GOTO_SIGNAL:
+				size->width = std::max<uint>(12, NWidgetScrollbar::GetVerticalDimension().width);
 				break;
 		}
 	}
@@ -943,7 +947,7 @@ static const NWidgetPart _nested_program_widgets[] = {
 														SetDataTip(STR_PROGSIG_COND_SET_SIGNAL, STR_PROGSIG_COND_SET_SIGNAL_TOOLTIP), SetResize(1, 0),
 			EndContainer(),
 		EndContainer(),
-		NWidget(WWT_IMGBTN, COLOUR_GREY, PROGRAM_WIDGET_GOTO_SIGNAL), SetMinimalSize(12, 12), SetDataTip(SPR_ARROW_RIGHT, STR_PROGSIG_GOTO_SIGNAL_TOOLTIP),
+		NWidget(WWT_PUSHIMGBTN, COLOUR_GREY, PROGRAM_WIDGET_GOTO_SIGNAL), SetMinimalSize(12, 12), SetDataTip(SPR_GOTO_LOCATION, STR_PROGSIG_GOTO_SIGNAL_TOOLTIP),
 	EndContainer(),
 
 	/* Second button row. */
